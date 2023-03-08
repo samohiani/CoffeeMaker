@@ -1,4 +1,5 @@
 def report():
+    """Prints current state of Machine"""
     print(f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g\nMoney: ${resources['money']}")
 
 
@@ -21,6 +22,7 @@ def process_coins():
 
 
 def is_transaction_successful(money_recieved,drink_cost):
+    """Returns true if the money inserted is enough to make the drink and False if not"""
     if money_recieved < drink_cost:
         print("Sorry that's not enough money. Money refunded.")
         return False
