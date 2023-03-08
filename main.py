@@ -17,6 +17,20 @@ def process_coins():
     total += 0.01 * int(input("how many pennies?: "))
     return total
 
+def is_transaction_successful(money_recieved,drink_cost):
+    if money_recieved < drink_cost:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+    elif money_recieved > drink_cost:
+        change = money_recieved - drink_cost
+        print(f"Here is ${round(change, 2)} in change.")
+        print(f"Here is your {choice} ☕️. Enjoy!")
+        return True
+    else:
+        print(f"Here is your {choice} ☕️. Enjoy!")
+        return True
+
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -61,17 +75,9 @@ while not turn_off:
     elif choice in MENU:
         if resource_sufficient(MENU[choice]['ingredients']):
             pay = process_coins()
-            if pay < MENU[choice]['cost']:
-                print("Sorry that's not enough money. Money refunded.")
-            elif pay > MENU[choice]['cost']:
-                change = pay - MENU[choice]['cost']
-                print(f"Here is ${round(change,2)} in change.")
-                print(f"Here is your {choice} ☕️. Enjoy!")
-            else:
-                print(f"Here is your {choice} ☕️. Enjoy!")
+            status_pay = is_transaction_successful(pay,MENU[choice]['cost'])
             resources['water'] -= MENU[choice]['ingredients']['water']
-            if ("milk" in MENU[choice]['ingredients']):
-                resources['milk'] -= MENU[choice]['ingredients']['milk']
+            resources['milk'] -= MENU[choice]['ingredients']['milk']
             resources['coffee'] -= MENU[choice]['ingredients']['coffee']
             resources['money'] += MENU[choice]['cost']
     else:
