@@ -73,7 +73,7 @@ turn_off = False
 while not turn_off:
     choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
     if choice == "off":
-        print("Turning off...")
+        print("Turning off....")
         turn_off = True
     elif choice == "report":
         report()
