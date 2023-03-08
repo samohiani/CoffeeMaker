@@ -1,6 +1,7 @@
 def report():
     print(f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g\nMoney: ${resources['money']}")
 
+
 def resource_sufficient(order_ingredient):
     """Returns True if order can be made, false if ingredients available are insufficient"""
     for item in order_ingredient:
@@ -9,13 +10,15 @@ def resource_sufficient(order_ingredient):
             return False
         return True
 
+
 def process_coins():
     """Returns the total calculated from coins inserted"""
-    total = 0.25 * int(input("how many quarters?: "))
-    total += 0.1 * int(input("how many dimes?: "))
-    total += 0.05 * int(input("how many nickles?: "))
-    total += 0.01 * int(input("how many pennies?: "))
+    total = 0.25 * int(input("How many quarters?: "))
+    total += 0.1 * int(input("How many dimes?: "))
+    total += 0.05 * int(input("How many nickles?: "))
+    total += 0.01 * int(input("How many pennies?: "))
     return total
+
 
 def is_transaction_successful(money_recieved,drink_cost):
     if money_recieved < drink_cost:
@@ -75,10 +78,10 @@ while not turn_off:
     elif choice in MENU:
         if resource_sufficient(MENU[choice]['ingredients']):
             pay = process_coins()
-            status_pay = is_transaction_successful(pay,MENU[choice]['cost'])
-            resources['water'] -= MENU[choice]['ingredients']['water']
-            resources['milk'] -= MENU[choice]['ingredients']['milk']
-            resources['coffee'] -= MENU[choice]['ingredients']['coffee']
-            resources['money'] += MENU[choice]['cost']
+            if is_transaction_successful(pay, MENU[choice]['cost']):
+                resources['water'] -= MENU[choice]['ingredients']['water']
+                resources['milk'] -= MENU[choice]['ingredients']['milk']
+                resources['coffee'] -= MENU[choice]['ingredients']['coffee']
+                resources['money'] += MENU[choice]['cost']
     else:
         print("Put in a valid input!")
